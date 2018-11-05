@@ -57,7 +57,8 @@ namespace Microsoft.ProjectOxford.Face
         /// <summary>
         /// The default service host.
         /// </summary>
-        private const string SERVICE_HOST = "https://api.projectoxford.ai/face/v1.0";
+        //private const string SERVICE_HOST = "https://api.projectoxford.ai/face/v1.0";
+        private const string SERVICE_HOST = "https://eastus.api.cognitive.microsoft.com/face/v1.0";
 
         /// <summary>
         /// The JSON content type header.

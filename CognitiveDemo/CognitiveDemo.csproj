@@ -10,9 +10,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="3.1.0.697729" />
+    <PackageReference Include="Xamarin.Forms" Version="3.3.0.912540" />
     <PackageReference Include="Xam.Plugin.Media" Version="4.0.1.5" />
-    <PackageReference Include="Acr.UserDialogs" Version="7.0.1" />
+    <PackageReference Include="Xamarin.Cognitive.Face" Version="0.5.2" />
+    <PackageReference Include="System.Data.SQLite" Version="1.0.109.2" />
+    <PackageReference Include="SQLite.Net-PCL" Version="3.1.1" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controls\" />
@@ -21,6 +23,30 @@
     <Folder Include="Resources\" />
     <Folder Include="ViewModels\" />
     <Folder Include="Views\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Database\CognitiveDemo.db" />
+    <None Remove="Resources\Product Images\Amt.png" />
+    <None Remove="Resources\Product Images\Epf.png" />
+    <None Remove="Resources\Product Images\Simulate.png" />
+    <None Remove="Resources\Product Images\Talpac.png" />
+    <None Remove="Resources\Product Images\Xecute.png" />
+    <None Remove="Resources\Product Images\Xeras.png" />
+    <None Remove="Resources\Product Images\Xpac.png" />
+    <None Remove="Resources\RPM_Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="Views\SignUpPage %28copy%29.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Product Images\Amt.png" />
+    <EmbeddedResource Include="Resources\Product Images\Epf.png" />
+    <EmbeddedResource Include="Resources\Product Images\Simulate.png" />
+    <EmbeddedResource Include="Resources\Product Images\Talpac.png" />
+    <EmbeddedResource Include="Resources\Product Images\Xecute.png" />
+    <EmbeddedResource Include="Resources\Product Images\Xeras.png" />
+    <EmbeddedResource Include="Resources\Product Images\Xpac.png" />
+    <EmbeddedResource Include="Resources\RPM_Logo.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Microsoft.ProjectOxford.Face\Microsoft.ProjectOxford.Face.csproj" />

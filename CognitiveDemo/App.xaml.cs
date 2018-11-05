@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.ProjectOxford.Face;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -7,11 +8,15 @@ namespace CognitiveDemo
 {
     public partial class App : Application
     {
+        public static DatabaseManager DbManager = new DatabaseManager();
+
+        public static FaceServiceClient FaceClient = new FaceServiceClient(Constants.FaceServiceSubscriptionKey);
+
         public App()
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new SignUpPage());
+            MainPage = new NavigationPage(new MainPage());
         }
 
         protected override void OnStart()

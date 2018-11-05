@@ -1,0 +1,9 @@
+﻿Expires 28/10/2018
+
+https://westcentralus.api.cognitive.microsoft.com/vision/v1.0
+
+https://westcentralus.api.cognitive.microsoft.com/vision/v2.0
+
+Key 1: be4aaf89515e4c69b7a804c905cdc6b5
+
+Key 2: f76b91f85ee4485d9f95e3e69ca14d17

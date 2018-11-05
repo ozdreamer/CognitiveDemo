@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<local:BasePage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="CognitiveDemo.SignUpPage"
+<local:BasePage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="CognitiveDemo.SignInPage"
                 xmlns:local="clr-namespace:CognitiveDemo;assembly=CognitiveDemo">
     <ContentPage.Content>  
         <StackLayout Orientation="Vertical" Padding="30" Spacing="40">  
@@ -9,16 +9,15 @@
                 <StackLayout Orientation="Vertical" Spacing="10">  
                     <Entry x:Name="Email" Text="{Binding Email}" Placeholder="Email" HeightRequest="40" Keyboard="Email"/>  
                     <Entry x:Name="Password" Text="{Binding Password}" Placeholder="Password" HeightRequest="40" IsPassword="True" Keyboard="Text"/>  
-                    <Entry x:Name="RepeatPassword" Text="{Binding RepeatPassword}" Placeholder="Repeat Password" HeightRequest="40" IsPassword="True" Keyboard="Text"/>  
                 </StackLayout>  
             </Frame>
             <StackLayout Orientation="Horizontal" Padding="20,0,20,0">
-                <Button Command="{Binding SubmitCommand}" Text="Sign Up" TextColor="White"  
+                <Button Command="{Binding SubmitCommand}" Text="Sign In" TextColor="White"  
                     FontAttributes="Bold" FontSize="Medium" HorizontalOptions="FillAndExpand"  
                     BackgroundColor="Green" />  
-                <Button Command="{Binding ClearCommand}" Text="Clear" TextColor="White"  
+                <Button Command="{Binding SignUpCommand}" Text="Register" TextColor="White"  
                     FontAttributes="Bold" FontSize="Medium" HorizontalOptions="FillAndExpand"  
-                    BackgroundColor="Red" />  
+                    BackgroundColor="Gray" />  
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>  

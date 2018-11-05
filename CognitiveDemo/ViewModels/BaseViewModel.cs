@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using Xamarin.Forms;
 
 namespace CognitiveDemo
 {
@@ -100,5 +101,9 @@ namespace CognitiveDemo
 
 			PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 		}
-	}
+
+        public Action<string> ShowErrorMessage;
+
+        public Action<BasePage> Navigate;
+    }
 }

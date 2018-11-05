@@ -1,10 +1,12 @@
 ﻿using System;
+using Xamarin.Forms;
+
 namespace CognitiveDemo
 {
-	public class Employee
+	public class Product
 	{
 		public string Name { get; set; }
 		public string Title { get; set; }
-		public string PhotoUrl { get; set; }
+		public ImageSource Image { get; set; }
 	}
 }

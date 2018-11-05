@@ -36,7 +36,7 @@ namespace CognitiveDemo
 			BindableProperty.Create(nameof(ImageSource), typeof(ImageSource), typeof(CardViewCell), null, BindingMode.OneWay, propertyChanged: async (BindableObject bindable, object oldValue, object newValue) =>
 			{
 				var ctrl = (CardViewCell)bindable;
-			ctrl.ImageSource = (ImageSource) newValue;
+			    ctrl.ImageSource = (ImageSource) newValue;
 			});
 
 		public ImageSource ImageSource
@@ -56,11 +56,11 @@ namespace CognitiveDemo
             image = new Image
             {
                 Aspect = Device.OnPlatform<Aspect>(Aspect.AspectFill, Aspect.AspectFill, Aspect.AspectFit),
-				HorizontalOptions = LayoutOptions.FillAndExpand,
-				VerticalOptions = LayoutOptions.StartAndExpand,
-				WidthRequest = 220,
-				HeightRequest = 200,
-				Source = ImageSource.FromUri(new Uri("https://avatars3.githubusercontent.com/u/1091304?v=3&s=460"))
+                HorizontalOptions = LayoutOptions.CenterAndExpand,
+                VerticalOptions = LayoutOptions.CenterAndExpand,
+                HeightRequest = 41,
+                WidthRequest = 134,
+                Source = ImageSource.FromUri(new Uri("https://avatars3.githubusercontent.com/u/1091304?v=3&s=460"))
 			};
 
 			textLabel = new Label

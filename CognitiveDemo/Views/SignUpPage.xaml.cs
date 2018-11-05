@@ -1,21 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using Xamarin.Forms;
-
-namespace CognitiveDemo
+﻿namespace CognitiveDemo
 {
-    public partial class SignUpPage : ContentPage
+    public partial class SignUpPage : BasePage
     {
         public SignUpViewModel ViewModel => this.BindingContext as SignUpViewModel;
 
-        public SignUpPage()
+        public SignUpPage() : base(new SignUpViewModel())
         {
-            this.BindingContext = new SignUpViewModel();
+            this.BindingContext = this.BaseViewModel;
             this.InitializeComponent();
-            this.ViewModel.ShowErrorMessage = (message) =>
-            {
-                this.DisplayAlert("Error", message, null);
-            };
         }
     }
 }
