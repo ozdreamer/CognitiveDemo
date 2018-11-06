@@ -2,12 +2,11 @@
 <local:BasePage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="CognitiveDemo.ProductsPage"
              Title="{Binding Title}"
 		     xmlns:local="clr-namespace:CognitiveDemo;assembly=CognitiveDemo">
-	<ContentPage.ToolbarItems>
-		<ToolbarItem Text="Identify" Command="{Binding FindSimilarFaceCommand}"/>
-	</ContentPage.ToolbarItems>
 	<ContentPage.Content>
 		<StackLayout>
-			<ListView ItemsSource="{Binding Products}" HasUnevenRows="true" SeparatorVisibility="None">
+            <Label Text="{Binding Email}" XAlign="Center" YAlign="Center" Margin="5" FontAttributes="Bold" />
+            <BoxView WidthRequest="3" HeightRequest="3" Color="Navy" />
+			<ListView ItemsSource="{Binding Products}" HasUnevenRows="true" SeparatorVisibility="None" Margin="5">
 				<ListView.ItemTemplate>
 					<DataTemplate>
 						<local:CardViewCell Text="{Binding Name}" Detail="{Binding Title}" ImageSource="{Binding Image}"/>

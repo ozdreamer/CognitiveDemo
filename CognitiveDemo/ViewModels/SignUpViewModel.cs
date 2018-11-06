@@ -11,6 +11,12 @@ namespace CognitiveDemo
 {
     public class SignUpViewModel : BaseViewModel
     {
+        public SignUpViewModel()
+        {
+            this.SignUpCommand = new Command(OnSignUpClicked);
+            this.ClearCommand = new Command(OnClearClicked);
+        }
+
         #region Properties
 
         private string email;
@@ -46,19 +52,13 @@ namespace CognitiveDemo
             }
         }
 
-        public ICommand SubmitCommand { protected set; get; }
+        public ICommand SignUpCommand { protected set; get; }
 
         public ICommand ClearCommand { protected set; get; }
 
         #endregion
 
-        public SignUpViewModel()
-        {
-            this.SubmitCommand = new Command(OnSubmit);
-            this.ClearCommand = new Command(OnClear);
-        }
-
-        private async void OnSubmit()
+        private async void OnSignUpClicked()
         {
             if (this.Password != this.RepeatPassword)
             {
@@ -85,7 +85,7 @@ namespace CognitiveDemo
                 }
             }
 
-            this.Navigate?.Invoke(new ProductsPage());
+            this.Navigate?.Invoke(new ProductsPage(this.Email));
         }
 
         private async Task<Guid> TrainFace(string personName)
@@ -146,7 +146,7 @@ namespace CognitiveDemo
             }
         }
 
-        private void OnClear()
+        private void OnClearClicked()
         {
             this.Email = null;
             this.Password = null;

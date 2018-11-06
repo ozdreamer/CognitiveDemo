@@ -1,5 +1,4 @@
-﻿using System;
-using SQLite.Net;
+﻿using SQLite;
 
 namespace CognitiveDemo
 {

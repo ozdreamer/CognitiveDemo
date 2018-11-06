@@ -13,7 +13,7 @@
                 </StackLayout>  
             </Frame>
             <StackLayout Orientation="Horizontal" Padding="20,0,20,0">
-                <Button Command="{Binding SubmitCommand}" Text="Sign Up" TextColor="White"  
+                <Button Command="{Binding SignUpCommand}" Text="Sign Up" TextColor="White"  
                     FontAttributes="Bold" FontSize="Medium" HorizontalOptions="FillAndExpand"  
                     BackgroundColor="Green" />  
                 <Button Command="{Binding ClearCommand}" Text="Clear" TextColor="White"  

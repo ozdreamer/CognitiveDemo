@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <local:BasePage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="CognitiveDemo.SignInPage"
                 xmlns:local="clr-namespace:CognitiveDemo;assembly=CognitiveDemo">
-    <ContentPage.Content>  
-        <StackLayout Orientation="Vertical" Padding="30" Spacing="40">  
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" Padding="30" Spacing="40">
             <BoxView HeightRequest="10"/>  
             <Image HorizontalOptions="Center" WidthRequest="300" Source="{local:ImageResource CognitiveDemo.Resources.RPM_Logo.png}"/>  
-            <Frame HasShadow="False">  
-                <StackLayout Orientation="Vertical" Spacing="10">  
-                    <Entry x:Name="Email" Text="{Binding Email}" Placeholder="Email" HeightRequest="40" Keyboard="Email"/>  
-                    <Entry x:Name="Password" Text="{Binding Password}" Placeholder="Password" HeightRequest="40" IsPassword="True" Keyboard="Text"/>  
-                </StackLayout>  
-            </Frame>
+            <StackLayout Orientation="Vertical" Spacing="10" IsVisible="{Binding IsLoginRequired}">
+                <Entry x:Name="Email" Text="{Binding Email}" Placeholder="Email" HeightRequest="40" Keyboard="Email"/>  
+                <Entry x:Name="Password" Text="{Binding Password}" Placeholder="Password" HeightRequest="40" IsPassword="True" Keyboard="Text"/>  
+            </StackLayout>  
+            <Image Source="{Binding CameraImage}" WidthRequest="100" HeightRequest="100" IsVisible="{Binding IsCameraAvailable}"/>
             <StackLayout Orientation="Horizontal" Padding="20,0,20,0">
-                <Button Command="{Binding SubmitCommand}" Text="Sign In" TextColor="White"  
+                <Button Command="{Binding SignInCommand}" Text="Sign In" TextColor="White"  
                     FontAttributes="Bold" FontSize="Medium" HorizontalOptions="FillAndExpand"  
                     BackgroundColor="Green" />  
                 <Button Command="{Binding SignUpCommand}" Text="Register" TextColor="White"  

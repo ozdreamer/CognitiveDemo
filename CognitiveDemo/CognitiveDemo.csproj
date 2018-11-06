@@ -14,7 +14,7 @@
     <PackageReference Include="Xam.Plugin.Media" Version="4.0.1.5" />
     <PackageReference Include="Xamarin.Cognitive.Face" Version="0.5.2" />
     <PackageReference Include="System.Data.SQLite" Version="1.0.109.2" />
-    <PackageReference Include="SQLite.Net-PCL" Version="3.1.1" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.5.231" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controls\" />
@@ -34,6 +34,7 @@
     <None Remove="Resources\Product Images\Xeras.png" />
     <None Remove="Resources\Product Images\Xpac.png" />
     <None Remove="Resources\RPM_Logo.png" />
+    <None Remove="Resources\Analog_Camera.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Remove="Views\SignUpPage %28copy%29.xaml" />
@@ -47,8 +48,12 @@
     <EmbeddedResource Include="Resources\Product Images\Xeras.png" />
     <EmbeddedResource Include="Resources\Product Images\Xpac.png" />
     <EmbeddedResource Include="Resources\RPM_Logo.png" />
+    <EmbeddedResource Include="Resources\Analog_Camera.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Microsoft.ProjectOxford.Face\Microsoft.ProjectOxford.Face.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Views\MainPage.xaml.cs" />
   </ItemGroup>
 </Project>

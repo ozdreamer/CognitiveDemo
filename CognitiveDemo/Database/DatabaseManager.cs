@@ -1,23 +1,14 @@
 ﻿using System;
-using SQLite.Net;
 using System.Collections.Generic;
-using Xamarin.Forms;
 using System.Linq;
+using SQLite;
+using Xamarin.Forms;
 
 namespace CognitiveDemo
 {
     public class DatabaseManager
     {
         SQLiteConnection dbConnection;
-
-        class temp
-        {
-            public string type { get; set; }
-            public string name { get; set; }
-            public string tbl_name { get; set; }
-            public string rootpage { get; set; }
-            public string sql { get; set; }
-        }
 
         public DatabaseManager()
         {
@@ -33,6 +24,12 @@ namespace CognitiveDemo
         {
             return this.dbConnection.Query<User>($"SELECT * FROM User WHERE Email='{email}'").FirstOrDefault();
         }
+
+        public User GetUser(Guid userId)
+        {
+            return this.dbConnection.Query<User>($"SELECT * FROM User WHERE UserId='{userId}'").FirstOrDefault();
+        }
+
 
         public int SaveUser(User user)
         {

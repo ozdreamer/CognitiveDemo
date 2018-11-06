@@ -2,8 +2,7 @@
 using System.IO;
 using CognitiveDemo.iOS;
 using Foundation;
-using SQLite.Net;
-using SQLite.Net.Platform.XamarinIOS;
+using SQLite;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(DatabaseService))]
@@ -32,7 +31,7 @@ namespace CognitiveDemo.iOS
                 File.Copy(existingDb, path);
             }
 
-            return new SQLiteConnection(new SQLitePlatformIOS(), path);
+            return new SQLiteConnection(path);
         }
     }
 }

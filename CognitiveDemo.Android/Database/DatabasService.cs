@@ -1,8 +1,7 @@
 ﻿using System;
 using System.IO;
 using CognitiveDemo.Droid;
-using SQLite.Net;
-using SQLite.Net.Platform.XamarinAndroid;
+using SQLite;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(DatabaseService))]
@@ -33,7 +32,7 @@ namespace CognitiveDemo.Droid
                 }
             }
 
-            return new SQLiteConnection(new SQLitePlatformAndroid(), path);
+            return new SQLiteConnection(path);
          }
  
          void ReadWriteStream(Stream readStream, Stream writeStream)
