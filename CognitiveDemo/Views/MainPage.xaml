@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local:BasePage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="CognitiveDemo.MainPage"
+                xmlns:local="clr-namespace:CognitiveDemo;assembly=CognitiveDemo">
+    <ContentPage.Content>
+        <StackLayout>
+            <Button Text="Face Login" Command="{Binding LoginPageCommand}"/>
+            <Button Text="Detect Emotion" Command="{Binding EmotionPageCommand}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</local:BasePage>

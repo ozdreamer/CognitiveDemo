@@ -1,21 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using Xamarin.Forms;
+using System.Threading.Tasks;
+using Plugin.Media;
+using Plugin.Media.Abstractions;
 
 namespace CognitiveDemo
 {
 	public class BaseViewModel : INotifyPropertyChanged
-	{
-		private string title = string.Empty;
+    {
+        public bool IsCameraAvailable => CrossMedia.IsSupported && CrossMedia.Current.IsCameraAvailable && CrossMedia.Current.IsTakePhotoSupported;
 
+        private string title = string.Empty;
 		public const string TitlePropertyName = "Title";
-
-		/// <summary>
-		/// Gets or sets the "Title" property
-		/// </summary>
-		/// <value>The title.</value>
-        /// 
 		public string Title
 		{
 			get { return title; }
@@ -23,12 +20,7 @@ namespace CognitiveDemo
 		}
 
 		private string subTitle = string.Empty;
-
-		/// <summary>
-		/// Gets or sets the "Subtitle" property
-		/// </summary>
 		public const string SubtitlePropertyName = "Subtitle";
-
 		public string Subtitle
 		{
 			get { return subTitle; }
@@ -36,12 +28,7 @@ namespace CognitiveDemo
 		}
 
 		private string icon = null;
-
-		/// <summary>
-		/// Gets or sets the "Icon" of the viewmodel
-		/// </summary>
 		public const string IconPropertyName = "Icon";
-		
         public string Icon
 		{
 			get { return icon; }
@@ -49,10 +36,6 @@ namespace CognitiveDemo
 		}
 
 		private bool isBusy;
-
-		/// <summary>
-		/// Gets or sets if the view is busy.
-		/// </summary>
 		public const string IsBusyPropertyName = "IsBusy";
 		public bool IsBusy
 		{
@@ -61,10 +44,6 @@ namespace CognitiveDemo
 		}
 
 		private bool canLoadMore = true;
-
-		/// <summary>
-		/// Gets or sets if we can load more.
-		/// </summary>
 		public const string CanLoadMorePropertyName = "CanLoadMore";
 		public bool CanLoadMore
 		{
@@ -101,6 +80,13 @@ namespace CognitiveDemo
 
 			PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 		}
+
+        protected async Task<MediaFile> TakePhoto()
+        {
+            return await CrossMedia.Current.Initialize()
+                                   ? await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions { DefaultCamera = CameraDevice.Front, ModalPresentationStyle = MediaPickerModalPresentationStyle.FullScreen })
+                : null;
+        }
 
         public Action<string> ShowErrorMessage;
 

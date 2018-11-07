@@ -17,9 +17,6 @@ namespace CognitiveDemo
         {
             this.SignInCommand = new Command(OnSignInClicked);
             this.SignUpCommand = new Command(OnSignUpClicked);
-
-            var assembly = typeof(SignInViewModel).GetTypeInfo().Assembly;
-            this.CameraImage = ImageSource.FromResource("CognitiveDemo.Resources.Analog_Camera.png");
         }
 
         #region Properties
@@ -52,9 +49,7 @@ namespace CognitiveDemo
 
         public ICommand SignUpCommand { protected set; get; }
 
-        public bool IsCameraAvailable => CrossMedia.IsSupported && CrossMedia.Current.IsCameraAvailable;
-
-        public bool IsLoginRequired => !this.IsCameraAvailable;
+        public bool IsLoginRequired => !IsCameraAvailable;
 
         #endregion
 
@@ -81,8 +76,8 @@ namespace CognitiveDemo
                 userEmail = existingUser.Email;
             }
 
-            // When a camera is available, do facial recognition.
-            if (this.IsCameraAvailable)
+            // Face API code.
+            if (IsCameraAvailable)
             {
                 var personIds = await this.IdentifyPersons();
 
@@ -117,20 +112,13 @@ namespace CognitiveDemo
         private async Task<IEnumerable<Guid>> IdentifyPersons()
         {
             var persons = new List<Guid>();
-            var initializeResult = await CrossMedia.Current.Initialize();
-            if (!initializeResult)
-            {
-                this.ShowErrorMessage?.Invoke("Can't initialize camera");
-                return persons;
-            }
-
-            using (var media = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions { }))
+            using (var media = await this.TakePhoto())
             {
                 if (media != null)
                 {
                     var faces = await App.FaceClient.DetectAsync(media.GetStream());
                     var faceIds = faces.Select(x => x.FaceId).ToArray();
-                    if (faceIds.Any())
+                    if (faceIds.Any() && (await App.FaceClient.GetPersonGroupsAsync()).Any(x => x.PersonGroupId == Constants.PersonGroupId))
                     {
                         var identifyResults = await App.FaceClient.IdentifyAsync(Constants.PersonGroupId, faceIds);
                         foreach (var result in identifyResults)

@@ -15,6 +15,8 @@
     <PackageReference Include="Xamarin.Cognitive.Face" Version="0.5.2" />
     <PackageReference Include="System.Data.SQLite" Version="1.0.109.2" />
     <PackageReference Include="sqlite-net-pcl" Version="1.5.231" />
+    <PackageReference Include="Microsoft.ProjectOxford.Emotion" Version="2.0.40" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controls\" />
@@ -54,6 +56,6 @@
     <ProjectReference Include="..\Microsoft.ProjectOxford.Face\Microsoft.ProjectOxford.Face.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Remove="Views\MainPage.xaml.cs" />
+    <Compile Remove="Views\EmotionDetectionPage.cs" />
   </ItemGroup>
 </Project>

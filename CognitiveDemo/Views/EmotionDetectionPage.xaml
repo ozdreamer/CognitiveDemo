@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local:BasePage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="CognitiveDemo.EmotionDetectionPage"
+             xmlns:local="clr-namespace:CognitiveDemo;assembly=CognitiveDemo">
+    <ContentPage.Content>
+        <StackLayout>
+            <BoxView HeightRequest="10"/>  
+            <StackLayout Orientation="Vertical" Spacing="10">
+                <Button WidthRequest="50" HeightRequest="50" Text="Capture" BorderWidth="2" BorderRadius="5" Command="{Binding CaptureCommand}"/>
+                <Image Source="{Binding FaceImage}" WidthRequest="150" HeightRequest="150"/>
+            </StackLayout>
+            <StackLayout>
+                <Label Text="Scores" FontAttributes="Bold" FontSize="Large"/>
+                <Grid BindingContext="{Binding SelectedScores}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Text="Anger:" Grid.Row="0" Grid.Column="0"/>
+                    <Label Text="{Binding Anger}" Grid.Row="0" Grid.Column="1"/>
+                    <Label Text="Fear:" Grid.Row="1" Grid.Column="0"/>
+                    <Label Text="{Binding Fear}" Grid.Row="1" Grid.Column="1"/>
+                    <Label Text="Happiness:" Grid.Row="2" Grid.Column="0"/>
+                    <Label Text="{Binding Happiness}" Grid.Row="2" Grid.Column="1"/>
+                    <Label Text="Sadness:" Grid.Row="3" Grid.Column="0"/>
+                    <Label Text="{Binding Sadness}" Grid.Row="3" Grid.Column="1"/>
+                    <Label Text="Surprise:" Grid.Row="4" Grid.Column="0"/>
+                    <Label Text="{Binding Surprise}" Grid.Row="4" Grid.Column="1"/>
+                    <Label Text="Nutral:" Grid.Row="5" Grid.Column="0"/>
+                    <Label Text="{Binding Nutral}" Grid.Row="5" Grid.Column="1"/>
+                </Grid>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</local:BasePage>

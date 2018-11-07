@@ -74,14 +74,17 @@ namespace CognitiveDemo
             }
 
             // Face API Code.
-            var userId = await this.TrainFace(this.Email);
-            if (userId != Guid.Empty)
+            if (IsCameraAvailable)
             {
-                var newUser = new User { UserId = userId.ToString(), Email = this.Email, Password = this.Password };
-                if (App.DbManager.SaveUser(newUser) == 0)
+                var userId = await this.TrainFace(this.Email);
+                if (userId != Guid.Empty)
                 {
-                    this.ShowErrorMessage?.Invoke("Failed to create the user");
-                    return;
+                    var newUser = new User { UserId = userId.ToString(), Email = this.Email, Password = this.Password };
+                    if (App.DbManager.SaveUser(newUser) == 0)
+                    {
+                        this.ShowErrorMessage?.Invoke("Failed to create the user");
+                        return;
+                    }
                 }
             }
 
@@ -90,11 +93,6 @@ namespace CognitiveDemo
 
         private async Task<Guid> TrainFace(string personName)
         {
-            if (!CrossMedia.IsSupported || !CrossMedia.Current.IsCameraAvailable)
-            {
-                return Guid.NewGuid();
-            }
-
             var personGroups = await App.FaceClient.GetPersonGroupsAsync();
             if (!personGroups.Any(x => x.PersonGroupId == Constants.PersonGroupId))
             {
@@ -108,38 +106,23 @@ namespace CognitiveDemo
                 var result = await App.FaceClient.CreatePersonAsync(Constants.PersonGroupId, personName);
                 if (result == null || result.PersonId == Guid.Empty)
                 {
-                    this.ShowErrorMessage?.Invoke("Coudn't create a person.");
+                    this.ShowErrorMessage?.Invoke("Couldn't create a person.");
                     return Guid.Empty;
                 }
 
                 personId = result.PersonId;
             }
 
-            if (!personId.HasValue)
+            using (var media = await this.TakePhoto())
             {
-                this.ShowErrorMessage?.Invoke("Coudn't create a person.");
-                return Guid.Empty;
-            }
-
-            var initializeResult = await CrossMedia.Current.Initialize();
-            if (!initializeResult)
-            {
-                this.ShowErrorMessage?.Invoke("Can't initialize camera.");
-                return Guid.Empty;
-            }
-
-            using (var media = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions { }))
-            {
-                if (media == null)
+                if (media != null)
                 {
-                    return Guid.Empty;
-                }
-
-                var result = await App.FaceClient.AddPersonFaceAsync(Constants.PersonGroupId, personId.Value, media.GetStream());
-                if (result.PersistedFaceId != Guid.Empty)
-                {
-                    await App.FaceClient.TrainPersonGroupAsync(Constants.PersonGroupId);
-                    return personId.Value;
+                    var result = await App.FaceClient.AddPersonFaceAsync(Constants.PersonGroupId, personId.Value, media.GetStream());
+                    if (result.PersistedFaceId != Guid.Empty)
+                    {
+                        await App.FaceClient.TrainPersonGroupAsync(Constants.PersonGroupId);
+                        return personId.Value;
+                    }
                 }
 
                 return Guid.Empty;
