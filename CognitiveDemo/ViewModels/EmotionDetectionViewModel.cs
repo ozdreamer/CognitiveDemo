@@ -1,8 +1,6 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.ProjectOxford.Common.Contract;
-using Plugin.Media;
-using Plugin.Media.Abstractions;
+using Microsoft.ProjectOxford.Vision.Contract;
 using Xamarin.Forms;
 
 namespace CognitiveDemo
@@ -53,6 +51,24 @@ namespace CognitiveDemo
             }
         }
 
+        private AnalysisResult selectedAnalysisResult;
+        public AnalysisResult SelectedAnalysisResult
+        {
+            get
+            {
+                return this.selectedAnalysisResult;
+            }
+
+            set
+            {
+                if (this.selectedAnalysisResult != value)
+                {
+                    this.selectedAnalysisResult = value;
+                    this.OnPropertyChanged(nameof(this.SelectedAnalysisResult));
+                }
+            }
+        }
+
         private async void OnCaptureClicked()
         {
             if (!IsCameraAvailable)
@@ -74,10 +90,17 @@ namespace CognitiveDemo
             {
                 if (media != null)
                 {
-                    this.FaceImage = ImageSource.FromStream(media.GetStream);
+                    var stream = media.GetStream();
+                    this.FaceImage = ImageSource.FromStream(() => { return stream; });
 
-                    var emotions = await App.EmotionClient.RecognizeAsync(media.GetStream());
-                    return emotions.FirstOrDefault();
+                    /*
+                    try { var emotions = await App.EmotionClient.RecognizeAsync(stream); }
+                    catch(Exception ex){}*/
+                    /*
+                    try { var desc = await App.VisionClient.DescribeAsync(stream); }
+                    catch (Exception ex) { }*/
+
+                    this.SelectedAnalysisResult = await App.VisionClient.DescribeAsync(stream);
                 }
             }
 

@@ -1,24 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <local:BasePage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="CognitiveDemo.SignUpPage"
+                Title="{Binding Title}"
                 xmlns:local="clr-namespace:CognitiveDemo;assembly=CognitiveDemo">
     <ContentPage.Content>  
         <StackLayout Orientation="Vertical" Padding="30" Spacing="40">  
-            <BoxView HeightRequest="10"/>  
-            <Image HorizontalOptions="Center" WidthRequest="300" Source="{local:ImageResource CognitiveDemo.Resources.RPM_Logo.png}"/>  
-            <Frame HasShadow="False">  
-                <StackLayout Orientation="Vertical" Spacing="10">  
-                    <Entry x:Name="Email" Text="{Binding Email}" Placeholder="Email" HeightRequest="40" Keyboard="Email"/>  
-                    <Entry x:Name="Password" Text="{Binding Password}" Placeholder="Password" HeightRequest="40" IsPassword="True" Keyboard="Text"/>  
-                    <Entry x:Name="RepeatPassword" Text="{Binding RepeatPassword}" Placeholder="Repeat Password" HeightRequest="40" IsPassword="True" Keyboard="Text"/>  
-                </StackLayout>  
-            </Frame>
-            <StackLayout Orientation="Horizontal" Padding="20,0,20,0">
-                <Button Command="{Binding SignUpCommand}" Text="Sign Up" TextColor="White"  
-                    FontAttributes="Bold" FontSize="Medium" HorizontalOptions="FillAndExpand"  
-                    BackgroundColor="Green" />  
-                <Button Command="{Binding ClearCommand}" Text="Clear" TextColor="White"  
-                    FontAttributes="Bold" FontSize="Medium" HorizontalOptions="FillAndExpand"  
-                    BackgroundColor="Red" />  
+            <Image HorizontalOptions="Center" HeightRequest="125" WidthRequest="125" Source="{local:ImageResource CognitiveDemo.Resources.Face_Detection_Icon.png}" IsVisible="{Binding IsCameraAvailable}"/>  
+            <StackLayout Orientation="Vertical" Spacing="10">  
+                <Entry x:Name="Email" Text="{Binding Email}" Placeholder="Email" HeightRequest="40" Keyboard="Email"/>  
+                <Entry x:Name="Password" Text="{Binding Password}" Placeholder="Password" HeightRequest="40" IsPassword="True"/>  
+                <Entry x:Name="RepeatPassword" Text="{Binding RepeatPassword}" Placeholder="Repeat Password" HeightRequest="40" IsPassword="True"/>  
+            </StackLayout>  
+            <StackLayout Orientation="Horizontal" Spacing="10">
+                <Button Command="{Binding SignUpCommand}" Text="Sign Up" TextColor="White" FontAttributes="Bold" FontSize="Medium" HorizontalOptions="FillAndExpand" BackgroundColor="Green"/>  
+                <Button Command="{Binding ClearCommand}" Text="Clear" TextColor="White" FontAttributes="Bold" FontSize="Medium" HorizontalOptions="FillAndExpand" BackgroundColor="Red"/>  
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>  

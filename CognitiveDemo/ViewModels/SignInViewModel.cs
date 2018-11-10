@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Input;
-
-using Plugin.Media;
-using Plugin.Media.Abstractions;
 using Xamarin.Forms;
 
 namespace CognitiveDemo
@@ -15,6 +11,7 @@ namespace CognitiveDemo
     {
         public SignInViewModel()
         {
+            this.Title = "Sign In";
             this.SignInCommand = new Command(OnSignInClicked);
             this.SignUpCommand = new Command(OnSignUpClicked);
         }
@@ -118,7 +115,7 @@ namespace CognitiveDemo
                 {
                     var faces = await App.FaceClient.DetectAsync(media.GetStream());
                     var faceIds = faces.Select(x => x.FaceId).ToArray();
-                    if (faceIds.Any() && (await App.FaceClient.GetPersonGroupsAsync()).Any(x => x.PersonGroupId == Constants.PersonGroupId))
+                    if (faceIds.Any() && (await App.FaceClient.ListPersonGroupsAsync(start: Constants.PersonGroupId, top:5)).Any(x => x.PersonGroupId == Constants.PersonGroupId))
                     {
                         var identifyResults = await App.FaceClient.IdentifyAsync(Constants.PersonGroupId, faceIds);
                         foreach (var result in identifyResults)

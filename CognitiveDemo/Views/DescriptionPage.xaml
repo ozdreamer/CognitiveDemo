@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local:BasePage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="CognitiveDemo.DescriptionPage"
+                Title="{Binding Title}"
+                xmlns:local="clr-namespace:CognitiveDemo;assembly=CognitiveDemo">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:ColorTypeConverter x:Key="ColorTypeConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Orientation="Vertical" Padding="75" Spacing="10">
+                <Image Source="{Binding FaceImage}" WidthRequest="150" HeightRequest="150"/>
+                <Button Command="{Binding CaptureCommand}" Text="Capture" TextColor="White" FontAttributes="Bold" FontSize="Medium" HorizontalOptions="FillAndExpand" BackgroundColor="Purple" />  
+            </StackLayout>
+            <StackLayout Padding="40">
+                <Label Text="Description" FontAttributes="Bold" FontSize="Large"/>
+                <Grid RowSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Text="Description:" Grid.Row="0" Grid.Column="0"/>
+                    <Label Text="{Binding Description}" Grid.Row="0" Grid.Column="1"/>
+                    <Label Text="Adult:" Grid.Row="1" Grid.Column="0"/>
+                    <Label Text="{Binding Adult}" Grid.Row="1" Grid.Column="1"/>
+                    <Label Text="Age:" Grid.Row="2" Grid.Column="0"/>
+                    <Label Text="{Binding Age}" Grid.Row="2" Grid.Column="1"/>
+                    <Label Text="Color:" Grid.Row="3" Grid.Column="0"/>
+                    <BoxView Grid.Row="3" Grid.Column="1" BackgroundColor="{Binding Color}" HeightRequest="5"/>
+                </Grid>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</local:BasePage>

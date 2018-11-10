@@ -8,12 +8,12 @@ namespace CognitiveDemo
         public MainViewModel()
         {
             this.LoginPageCommand = new Command(this.OpenLoginPage);
-            this.EmotionPageCommand = new Command(this.OpenEmotionPage);
+            this.DescriptionPageCommand = new Command(this.OpenDescriptionPage);
         }
 
-        private void OpenEmotionPage()
+        private void OpenDescriptionPage()
         {
-            this.Navigate?.Invoke(new EmotionDetectionPage());
+            this.Navigate?.Invoke(new DescriptionPage());
         }
 
         private void OpenLoginPage()
@@ -23,6 +23,6 @@ namespace CognitiveDemo
 
         public Command LoginPageCommand { get; protected set; }
 
-        public Command EmotionPageCommand { get; protected set; }
+        public Command DescriptionPageCommand { get; protected set; }
     }
 }

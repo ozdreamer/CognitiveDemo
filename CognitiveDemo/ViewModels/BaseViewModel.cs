@@ -56,8 +56,6 @@ namespace CognitiveDemo
 			string propertyName,
 			Action onChanged = null)
 		{
-
-
 			if (EqualityComparer<T>.Default.Equals(backingStore, value))
 				return;
 
@@ -73,18 +71,13 @@ namespace CognitiveDemo
 
 		public void OnPropertyChanged(string propertyName)
 		{
-            if (PropertyChanged == null)
-            {
-                return;
-            }
-
-			PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
 
         protected async Task<MediaFile> TakePhoto()
         {
             return await CrossMedia.Current.Initialize()
-                                   ? await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions { DefaultCamera = CameraDevice.Front, ModalPresentationStyle = MediaPickerModalPresentationStyle.FullScreen })
+                ? await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions { DefaultCamera = CameraDevice.Front, ModalPresentationStyle = MediaPickerModalPresentationStyle.FullScreen })
                 : null;
         }
 

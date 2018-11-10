@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <local:BasePage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="CognitiveDemo.MainPage"
+                Title="{Binding Title}"
                 xmlns:local="clr-namespace:CognitiveDemo;assembly=CognitiveDemo">
     <ContentPage.Content>
-        <StackLayout>
-            <Button Text="Face Login" Command="{Binding LoginPageCommand}"/>
-            <Button Text="Detect Emotion" Command="{Binding EmotionPageCommand}"/>
+        <StackLayout Orientation="Vertical" Padding="75" Spacing="10">
+            <BoxView HeightRequest="30"/>
+            <Image HorizontalOptions="Center" WidthRequest="300" Source="{local:ImageResource CognitiveDemo.Resources.RPM_Logo.png}"/>
+            <BoxView HeightRequest="30"/>
+            <Button Text="Face Login" Command="{Binding LoginPageCommand}" TextColor="White"
+                    FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand" BackgroundColor="Navy"/>
+            <Button Text="Description" Command="{Binding DescriptionPageCommand}" TextColor="White"
+                    FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand" BackgroundColor="Navy"/>
         </StackLayout>
     </ContentPage.Content>
 </local:BasePage>

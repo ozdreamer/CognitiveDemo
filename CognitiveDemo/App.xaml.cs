@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.ProjectOxford.Face;
 using Microsoft.ProjectOxford.Emotion;
+using Microsoft.ProjectOxford.Vision;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,9 +12,11 @@ namespace CognitiveDemo
     {
         public static DatabaseManager DbManager = new DatabaseManager();
 
-        public static EmotionServiceClient EmotionClient = new EmotionServiceClient(Constants.FaceServiceSubscriptionKey, Constants.FaceServiceEndPoint);
+        public static VisionServiceClient VisionClient = new VisionServiceClient(Constants.VisionServiceSubscriptionKey1, Constants.VisionServiceEndPoint);
 
-        public static FaceServiceClient FaceClient = new FaceServiceClient(Constants.FaceServiceSubscriptionKey);
+        public static FaceServiceClient FaceClient = new FaceServiceClient(Constants.FaceServiceSubscriptionKey1, Constants.FaceServiceEndPoint);
+
+        public static EmotionServiceClient EmotionClient = new EmotionServiceClient(Constants.VisionServiceSubscriptionKey1, Constants.EmotionServiceEndPoint);
 
         public App()
         {

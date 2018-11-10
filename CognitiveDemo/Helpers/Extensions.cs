@@ -21,4 +21,13 @@ namespace CognitiveDemo
             return ImageSource.FromResource(Source, typeof(ImageResourceExtension).GetTypeInfo().Assembly);
         }
     }
+
+    [TypeConversion(typeof(Color))]
+    public class ColorTypeConverter : TypeConverter
+    {
+        public override object ConvertFromInvariantString(string value)
+        {
+            return Color.FromHex(value);
+        }
+    }
 }

@@ -10,13 +10,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="3.3.0.912540" />
-    <PackageReference Include="Xam.Plugin.Media" Version="4.0.1.5" />
-    <PackageReference Include="Xamarin.Cognitive.Face" Version="0.5.2" />
-    <PackageReference Include="System.Data.SQLite" Version="1.0.109.2" />
-    <PackageReference Include="sqlite-net-pcl" Version="1.5.231" />
-    <PackageReference Include="Microsoft.ProjectOxford.Emotion" Version="2.0.40" />
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controls\" />
@@ -25,6 +18,7 @@
     <Folder Include="Resources\" />
     <Folder Include="ViewModels\" />
     <Folder Include="Views\" />
+    <Folder Include="Styles\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Database\CognitiveDemo.db" />
@@ -37,9 +31,10 @@
     <None Remove="Resources\Product Images\Xpac.png" />
     <None Remove="Resources\RPM_Logo.png" />
     <None Remove="Resources\Analog_Camera.png" />
+    <None Remove="Resources\Face_Detection_Icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Remove="Views\SignUpPage %28copy%29.xaml" />
+    <EmbeddedResource Remove="Styles\PageStyle.css" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Product Images\Amt.png" />
@@ -51,11 +46,15 @@
     <EmbeddedResource Include="Resources\Product Images\Xpac.png" />
     <EmbeddedResource Include="Resources\RPM_Logo.png" />
     <EmbeddedResource Include="Resources\Analog_Camera.png" />
+    <EmbeddedResource Include="Resources\Face_Detection_Icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Microsoft.ProjectOxford.Face\Microsoft.ProjectOxford.Face.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="Views\EmotionDetectionPage.cs" />
+    <PackageReference Include="Xam.Plugin.Media" Version="4.0.1.5" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.5.231" />
+    <PackageReference Include="Xamarin.Forms" Version="3.3.0.967583" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="Microsoft.ProjectOxford.Face.DotNetStandard" Version="1.0.0" />
+    <PackageReference Include="Microsoft.ProjectOxford.Emotion" Version="2.0.40" />
+    <PackageReference Include="Microsoft.ProjectOxford.Vision" Version="1.0.393" />
   </ItemGroup>
 </Project>

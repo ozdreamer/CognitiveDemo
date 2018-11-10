@@ -2,9 +2,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-
-using Plugin.Media;
-using Plugin.Media.Abstractions;
 using Xamarin.Forms;
 
 namespace CognitiveDemo
@@ -13,6 +10,7 @@ namespace CognitiveDemo
     {
         public SignUpViewModel()
         {
+            this.Title = "Sign UP";
             this.SignUpCommand = new Command(OnSignUpClicked);
             this.ClearCommand = new Command(OnClearClicked);
         }
@@ -93,7 +91,7 @@ namespace CognitiveDemo
 
         private async Task<Guid> TrainFace(string personName)
         {
-            var personGroups = await App.FaceClient.GetPersonGroupsAsync();
+            var personGroups = await App.FaceClient.ListPersonGroupsAsync(start:Constants.PersonGroupId, top:5);
             if (!personGroups.Any(x => x.PersonGroupId == Constants.PersonGroupId))
             {
                 await App.FaceClient.CreatePersonGroupAsync(Constants.PersonGroupId, "rpm-person-group");

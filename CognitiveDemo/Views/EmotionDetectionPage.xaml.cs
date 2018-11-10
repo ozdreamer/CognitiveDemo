@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Xamarin.Forms;
-
-namespace CognitiveDemo
+﻿namespace CognitiveDemo
 {
     public partial class EmotionDetectionPage : BasePage
     {
