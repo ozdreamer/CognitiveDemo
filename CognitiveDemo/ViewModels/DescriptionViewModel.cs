@@ -11,6 +11,7 @@ namespace CognitiveDemo
     {
         public DescriptionViewModel()
         {
+            this.Title = "Description";
             this.CaptureCommand = new Command(this.OnCaptureClicked);
             this.FaceImage = ImageSource.FromResource("CognitiveDemo.Resources.Face_Detection_Icon.png");
         }
