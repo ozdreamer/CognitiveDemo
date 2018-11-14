@@ -4,6 +4,7 @@ using Microsoft.ProjectOxford.Emotion;
 using Microsoft.ProjectOxford.Vision;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using System.Net.Http;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace CognitiveDemo

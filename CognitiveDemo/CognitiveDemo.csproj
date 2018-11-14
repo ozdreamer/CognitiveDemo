@@ -18,7 +18,6 @@
     <Folder Include="Resources\" />
     <Folder Include="ViewModels\" />
     <Folder Include="Views\" />
-    <Folder Include="Styles\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Database\CognitiveDemo.db" />
@@ -32,9 +31,11 @@
     <None Remove="Resources\RPM_Logo.png" />
     <None Remove="Resources\Analog_Camera.png" />
     <None Remove="Resources\Face_Detection_Icon.png" />
+    <None Remove="Resources\Microphone.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Remove="Styles\PageStyle.css" />
+    <EmbeddedResource Remove="Styles\AllStyles.xaml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Product Images\Amt.png" />
@@ -47,6 +48,7 @@
     <EmbeddedResource Include="Resources\RPM_Logo.png" />
     <EmbeddedResource Include="Resources\Analog_Camera.png" />
     <EmbeddedResource Include="Resources\Face_Detection_Icon.png" />
+    <EmbeddedResource Include="Resources\Microphone.png" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xam.Plugin.Media" Version="4.0.1.5" />
@@ -56,5 +58,7 @@
     <PackageReference Include="Microsoft.ProjectOxford.Face.DotNetStandard" Version="1.0.0" />
     <PackageReference Include="Microsoft.ProjectOxford.Emotion" Version="2.0.40" />
     <PackageReference Include="Microsoft.ProjectOxford.Vision" Version="1.0.393" />
+    <PackageReference Include="Microsoft.ProjectOxford.SpeechRecognition-x86" Version="1.0.0.7" />
+    <PackageReference Include="Plugin.AudioRecorder" Version="1.1.0" />
   </ItemGroup>
 </Project>

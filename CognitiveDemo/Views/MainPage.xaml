@@ -7,10 +7,9 @@
             <BoxView HeightRequest="30"/>
             <Image HorizontalOptions="Center" WidthRequest="300" Source="{local:ImageResource CognitiveDemo.Resources.RPM_Logo.png}"/>
             <BoxView HeightRequest="30"/>
-            <Button Text="Face Login" Command="{Binding LoginPageCommand}" TextColor="White"
-                    FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand" BackgroundColor="Navy"/>
-            <Button Text="Description" Command="{Binding DescriptionPageCommand}" TextColor="White"
-                    FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand" BackgroundColor="Navy"/>
+            <Button Text="Face Login" Command="{Binding LoginPageCommand}" Style="{StaticResource MainButtonStyle}"/>
+            <Button Text="Description" Command="{Binding DescriptionPageCommand}" Style="{StaticResource MainButtonStyle}"/>
+            <!--<Button Text="Speech to Text" Command="{Binding SpeechToTextPageCommand}" Style="{StaticResource MainButtonStyle}"/>-->
         </StackLayout>
     </ContentPage.Content>
 </local:BasePage>

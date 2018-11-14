@@ -35,6 +35,8 @@ namespace CognitiveDemo
                     this.OnPropertyChanged(nameof(this.Color));
                     this.OnPropertyChanged(nameof(this.Adult));
                     this.OnPropertyChanged(nameof(this.Age));
+                    this.OnPropertyChanged(nameof(this.Gender));
+                    this.OnPropertyChanged(nameof(this.Category));
                 }
             }
         }
@@ -65,6 +67,10 @@ namespace CognitiveDemo
 
         public string Age => this.SelectedAnalysisResult?.Faces.FirstOrDefault()?.Age.ToString() ?? string.Empty;
 
+        public string Gender => this.SelectedAnalysisResult?.Faces.FirstOrDefault()?.Gender ?? string.Empty;
+
+        public string Category => this.SelectedAnalysisResult?.Categories.FirstOrDefault()?.Name ?? string.Empty;
+
         private async void OnCaptureClicked()
         {
             if (!IsCameraAvailable)
@@ -74,7 +80,6 @@ namespace CognitiveDemo
             }
 
             this.SelectedAnalysisResult = await this.PerformAnalysis();
-            //var recog = await this.Recognize();
         }
 
         private async Task<AnalysisResult> PerformAnalysis()
@@ -83,11 +88,7 @@ namespace CognitiveDemo
             {
                 if (media != null)
                 {
-/*                    var stream = media.GetStream();
-                    this.FaceImage = ImageSource.FromStream(() => stream);
-
-                    stream.Seek(0, System.IO.SeekOrigin.Begin); */
-
+                    this.FaceImage = ImageSource.FromStream(media.GetStream);
                     return await App.VisionClient.AnalyzeImageAsync(media.GetStream(), new[]{ VisualFeature.Adult, VisualFeature.Color, VisualFeature.Description, VisualFeature.ImageType, VisualFeature.Faces, VisualFeature.Categories });
                 }
             }

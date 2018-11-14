@@ -4,7 +4,7 @@
                 xmlns:local="clr-namespace:CognitiveDemo;assembly=CognitiveDemo">
     <ContentPage.Content>  
         <StackLayout Orientation="Vertical" Padding="30" Spacing="40">  
-            <Image HorizontalOptions="Center" HeightRequest="125" WidthRequest="125" Source="{local:ImageResource CognitiveDemo.Resources.Face_Detection_Icon.png}" IsVisible="{Binding IsCameraAvailable}"/>  
+            <Image HorizontalOptions="Center" HeightRequest="125" WidthRequest="125" Source="{Binding FaceImage}" IsVisible="{Binding IsCameraAvailable}"/>  
             <StackLayout Orientation="Vertical" Spacing="10">  
                 <Entry x:Name="Email" Text="{Binding Email}" Placeholder="Email" HeightRequest="40" Keyboard="Email"/>  
                 <Entry x:Name="Password" Text="{Binding Password}" Placeholder="Password" HeightRequest="40" IsPassword="True"/>  

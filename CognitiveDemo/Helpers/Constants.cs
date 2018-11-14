@@ -16,6 +16,12 @@
 
         public const string EmotionServiceEndPoint = "https://eastus.api.cognitive.microsoft.com/emotion/v1.0/";
 
+        public const string SpeechServiceSubscriptionKey1 = "5f0f074df39645d79bbf13cd86219580";
+
+        public const string SpeechServiceSubscriptionKey2 = "4b6d25ae373c402aadd55f8fcfbea425";
+
+        public const string SpeechServiceEndPoint = "https://eastus.api.cognitive.microsoft.com/sts/v1.0/issuetoken/";
+
         public const string PersonGroupId = "rpmgroup";
     }
 }

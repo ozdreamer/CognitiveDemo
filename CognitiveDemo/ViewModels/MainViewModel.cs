@@ -7,22 +7,15 @@ namespace CognitiveDemo
     {
         public MainViewModel()
         {
-            this.LoginPageCommand = new Command(this.OpenLoginPage);
-            this.DescriptionPageCommand = new Command(this.OpenDescriptionPage);
-        }
-
-        private void OpenDescriptionPage()
-        {
-            this.Navigate?.Invoke(new DescriptionPage());
-        }
-
-        private void OpenLoginPage()
-        {
-            this.Navigate?.Invoke(new SignInPage());
+            this.LoginPageCommand = new Command(() => this.Navigate?.Invoke(new SignInPage()));
+            this.DescriptionPageCommand = new Command(() => this.Navigate?.Invoke(new DescriptionPage()));
+            this.SpeechToTextPageCommand = new Command(() => this.Navigate?.Invoke(new SpeechToTextPage()));
         }
 
         public Command LoginPageCommand { get; protected set; }
 
         public Command DescriptionPageCommand { get; protected set; }
+
+        public Command SpeechToTextPageCommand { get; protected set; }
     }
 }

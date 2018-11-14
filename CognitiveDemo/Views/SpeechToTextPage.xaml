@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local:BasePage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="CognitiveDemo.SpeechToTextPage"
+                Title="{Binding Title}"
+                xmlns:local="clr-namespace:CognitiveDemo;assembly=CognitiveDemo">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" Padding="30" Spacing="40">
+            <Image WidthRequest="125" HeightRequest="125" Source="{local:ImageResource CognitiveDemo.Resources.Microphone.png}" IsVisible="{Binding IsCameraAvailable}"/>
+            <StackLayout Orientation="Horizontal" Spacing="10">
+                <Button Command="{Binding RecordCommand}" Text="Record" TextColor="White" FontAttributes="Bold" FontSize="Medium" HorizontalOptions="FillAndExpand" BackgroundColor="Green" />  
+            </StackLayout>
+            <StackLayout Orientation="Vertical" Spacing="10" IsVisible="{Binding IsLoginRequired}">
+                <Editor x:Name="Speech" Text="{Binding Speech}" Placeholder="Speeh" HeightRequest="150"/>  
+            </StackLayout>  
+        </StackLayout>
+    </ContentPage.Content>
+</local:BasePage>

@@ -8,7 +8,7 @@
                 <Entry x:Name="Email" Text="{Binding Email}" Placeholder="Email" HeightRequest="40" Keyboard="Email"/>  
                 <Entry x:Name="Password" Text="{Binding Password}" Placeholder="Password" HeightRequest="40" IsPassword="True" Keyboard="Text"/>  
             </StackLayout>  
-            <Image WidthRequest="125" HeightRequest="125" Source="{local:ImageResource CognitiveDemo.Resources.Face_Detection_Icon.png}" IsVisible="{Binding IsCameraAvailable}"/>
+            <Image WidthRequest="125" HeightRequest="125" Source="{Binding FaceImage}" IsVisible="{Binding IsCameraAvailable}"/>
             <StackLayout Orientation="Horizontal" Spacing="10">
                 <Button Command="{Binding SignInCommand}" Text="Sign In" TextColor="White" FontAttributes="Bold" FontSize="Medium" HorizontalOptions="FillAndExpand" BackgroundColor="Green" />  
                 <Button Command="{Binding SignUpCommand}" Text="Register" TextColor="White" FontAttributes="Bold" FontSize="Medium" HorizontalOptions="FillAndExpand" BackgroundColor="Gray" />  

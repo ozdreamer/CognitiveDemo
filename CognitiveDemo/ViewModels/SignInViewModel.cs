@@ -12,6 +12,7 @@ namespace CognitiveDemo
         public SignInViewModel()
         {
             this.Title = "Sign In";
+            this.FaceImage = ImageSource.FromResource("CognitiveDemo.Resources.Face_Detection_Icon.png");
             this.SignInCommand = new Command(OnSignInClicked);
             this.SignUpCommand = new Command(OnSignUpClicked);
         }
@@ -40,7 +41,23 @@ namespace CognitiveDemo
             }
         }
 
-        public ImageSource CameraImage { protected set; get; }
+        private ImageSource faceImage;
+        public ImageSource FaceImage
+        {
+            get
+            {
+                return this.faceImage;
+            }
+
+            set
+            {
+                if (this.faceImage != value)
+                {
+                    this.faceImage = value;
+                    this.OnPropertyChanged(nameof(this.FaceImage));
+                }
+            }
+        }
 
         public ICommand SignInCommand { protected set; get; }
 
@@ -106,17 +123,29 @@ namespace CognitiveDemo
             this.Navigate?.Invoke(new ProductsPage(userEmail));
         }
 
+        /// <summary>
+        /// Identifies the persons.
+        /// </summary>
+        /// <returns>The persons.</returns>
         private async Task<IEnumerable<Guid>> IdentifyPersons()
         {
             var persons = new List<Guid>();
+
+            // Take a photo using the phone camera.
             using (var media = await this.TakePhoto())
             {
                 if (media != null)
                 {
+                    this.FaceImage = ImageSource.FromStream(media.GetStream);
+
+                    // Detect the faces from the photo.
                     var faces = await App.FaceClient.DetectAsync(media.GetStream());
                     var faceIds = faces.Select(x => x.FaceId).ToArray();
-                    if (faceIds.Any() && (await App.FaceClient.ListPersonGroupsAsync(start: Constants.PersonGroupId, top:5)).Any(x => x.PersonGroupId == Constants.PersonGroupId))
+
+                    // If a face has been detected and if there is someone in the rpm group.
+                    if (faceIds.Any() && (await App.FaceClient.ListPersonGroupsAsync()).Any(x => x.PersonGroupId == Constants.PersonGroupId))
                     {
+                        // Identify the person with given list of faces.
                         var identifyResults = await App.FaceClient.IdentifyAsync(Constants.PersonGroupId, faceIds);
                         foreach (var result in identifyResults)
                         {
