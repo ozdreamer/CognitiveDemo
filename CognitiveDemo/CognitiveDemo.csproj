@@ -20,7 +20,6 @@
     <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="Database\CognitiveDemo.db" />
     <None Remove="Resources\Product Images\Amt.png" />
     <None Remove="Resources\Product Images\Epf.png" />
     <None Remove="Resources\Product Images\Simulate.png" />
@@ -60,5 +59,10 @@
     <PackageReference Include="Microsoft.ProjectOxford.Vision" Version="1.0.393" />
     <PackageReference Include="Microsoft.ProjectOxford.SpeechRecognition-x86" Version="1.0.0.7" />
     <PackageReference Include="Plugin.AudioRecorder" Version="1.1.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Database\CognitiveDemo.db">
+      <LogicalName>CognitiveDemo.Database.CognitiveDemo.db</LogicalName>
+    </None>
   </ItemGroup>
 </Project>

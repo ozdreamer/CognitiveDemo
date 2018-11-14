@@ -19,14 +19,14 @@ namespace CognitiveDemo
 
         #region Properties
 
-        private string email;
-        public string Email
+        private string name;
+        public string Name
         {
-            get { return this.email; }
+            get { return this.name; }
             set
             {
-                this.email = value;
-                this.OnPropertyChanged(nameof(this.Email));
+                this.name = value;
+                this.OnPropertyChanged(nameof(this.Name));
             }
         }
 
@@ -69,12 +69,12 @@ namespace CognitiveDemo
 
         private async void OnSignInClicked()
         {
-            string userEmail = null;
+            string existingUserName = null;
 
             // When user login is required (no camera available)
             if (this.IsLoginRequired)
             {
-                var existingUser = App.DbManager.GetUser(this.Email);
+                var existingUser = App.DbManager.GetUser(this.Name);
                 if (existingUser == null)
                 {
                     this.ShowErrorMessage?.Invoke("User doesn't exists");
@@ -87,7 +87,7 @@ namespace CognitiveDemo
                     return;
                 }
 
-                userEmail = existingUser.Email;
+                existingUserName = existingUser.Name;
             }
 
             // Face API code.
@@ -108,19 +108,19 @@ namespace CognitiveDemo
                     var identifiedUser = App.DbManager.GetUser(personId);
                     if (identifiedUser != null)
                     {
-                        userEmail = identifiedUser.Email;
+                        existingUserName = identifiedUser.Name;
                         break;
                     }
                 }
 
-                if (userEmail == null)
+                if (existingUserName == null)
                 {
                     this.ShowErrorMessage?.Invoke("No user found with the given face");
                     return;
                 }
             }
 
-            this.Navigate?.Invoke(new ProductsPage(userEmail));
+            this.Navigate?.Invoke(new ProductsPage(existingUserName));
         }
 
         /// <summary>

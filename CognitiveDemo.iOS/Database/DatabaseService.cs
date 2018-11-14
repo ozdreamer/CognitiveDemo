@@ -23,6 +23,10 @@ namespace CognitiveDemo.iOS
             }
 
             string path = Path.Combine(libFolder, sqliteFilename);
+            if (Constants.DeleteDatabase)
+            {
+                File.Delete(path);
+            }
 
             // This is where we copy in the pre-created database
             if (!File.Exists(path))

@@ -20,16 +20,15 @@ namespace CognitiveDemo
             return this.dbConnection.Query<User>("SELECT * FROM User");
         }
 
-        public User GetUser(string email)
+        public User GetUser(string name)
         {
-            return this.dbConnection.Query<User>($"SELECT * FROM User WHERE Email='{email}'").FirstOrDefault();
+            return this.dbConnection.Query<User>($"SELECT * FROM User WHERE Name='{name}'").FirstOrDefault();
         }
 
         public User GetUser(Guid userId)
         {
             return this.dbConnection.Query<User>($"SELECT * FROM User WHERE UserId='{userId}'").FirstOrDefault();
         }
-
 
         public int SaveUser(User user)
         {

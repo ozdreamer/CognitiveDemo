@@ -18,14 +18,14 @@ namespace CognitiveDemo
 
         #region Properties
 
-        private string email;
-        public string Email
+        private string name;
+        public string Name
         {
-            get { return this.email; }
+            get { return this.name; }
             set
             {
-                this.email = value;
-                this.OnPropertyChanged(nameof(this.Email));
+                this.name = value;
+                this.OnPropertyChanged(nameof(this.Name));
             }
         }
 
@@ -83,17 +83,17 @@ namespace CognitiveDemo
                 return;
             }
 
-            var existingUser = App.DbManager.GetAllUsers().FirstOrDefault(x => x.Email == this.Email);
+            var existingUser = App.DbManager.GetAllUsers().FirstOrDefault(x => x.Name == this.Name);
             if (existingUser != null)
             {
                 this.ShowErrorMessage?.Invoke("User exists");
                 return;
             }
 
-            var userId = IsCameraAvailable ? await this.TrainFace(this.Email) : Guid.NewGuid();
+            var userId = IsCameraAvailable ? await this.TrainFace(this.Name) : Guid.NewGuid();
             if (userId != Guid.Empty)
             {
-                var newUser = new User { UserId = userId.ToString(), Email = this.Email, Password = this.Password };
+                var newUser = new User { UserId = userId.ToString(), Name = this.Name, Password = this.Password };
                 if (App.DbManager.SaveUser(newUser) == 0)
                 {
                     this.ShowErrorMessage?.Invoke("Failed to create the user");
@@ -101,7 +101,7 @@ namespace CognitiveDemo
                 }
             }
 
-            this.Navigate?.Invoke(new ProductsPage(this.Email));
+            this.Navigate?.Invoke(new ProductsPage(this.Name));
         }
 
         /// <summary>
@@ -158,7 +158,7 @@ namespace CognitiveDemo
 
         private void OnClearClicked()
         {
-            this.Email = null;
+            this.Name = null;
             this.Password = null;
             this.RepeatPassword = null;
         }

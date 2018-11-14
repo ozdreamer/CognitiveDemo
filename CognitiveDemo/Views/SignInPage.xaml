@@ -5,7 +5,7 @@
     <ContentPage.Content>
         <StackLayout Orientation="Vertical" Padding="30" Spacing="40">
             <StackLayout Orientation="Vertical" Spacing="10" IsVisible="{Binding IsLoginRequired}">
-                <Entry x:Name="Email" Text="{Binding Email}" Placeholder="Email" HeightRequest="40" Keyboard="Email"/>  
+                <Entry x:Name="Name" Text="{Binding Name}" Placeholder="Name" HeightRequest="40"/>  
                 <Entry x:Name="Password" Text="{Binding Password}" Placeholder="Password" HeightRequest="40" IsPassword="True" Keyboard="Text"/>  
             </StackLayout>  
             <Image WidthRequest="125" HeightRequest="125" Source="{Binding FaceImage}" IsVisible="{Binding IsCameraAvailable}"/>

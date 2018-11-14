@@ -23,5 +23,7 @@
         public const string SpeechServiceEndPoint = "https://eastus.api.cognitive.microsoft.com/sts/v1.0/issuetoken/";
 
         public const string PersonGroupId = "rpmgroup";
+
+        public const bool DeleteDatabase = false;
     }
 }
