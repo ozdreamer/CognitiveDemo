@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using Acr.UserDialogs;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 
@@ -81,7 +82,7 @@ namespace CognitiveDemo
                 : null;
         }
 
-        public Action<string> ShowErrorMessage;
+        protected IUserDialogs Dialog => UserDialogs.Instance;
 
         public Action<BasePage> Navigate;
     }

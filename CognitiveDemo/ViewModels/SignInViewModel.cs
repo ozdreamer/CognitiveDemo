@@ -77,13 +77,13 @@ namespace CognitiveDemo
                 var existingUser = App.DbManager.GetUser(this.Name);
                 if (existingUser == null)
                 {
-                    this.ShowErrorMessage?.Invoke("User doesn't exists");
+                    this.Dialog.Alert("User doesn't exists");
                     return;
                 }
 
                 if (existingUser.Password != this.Password)
                 {
-                    this.ShowErrorMessage?.Invoke("Invalid password");
+                    this.Dialog.Alert("Invalid password");
                     return;
                 }
 
@@ -94,11 +94,12 @@ namespace CognitiveDemo
             if (IsCameraAvailable)
             {
                 var personIds = await this.IdentifyPersons();
+                this.Dialog.Loading().Hide();
 
                 // No person identified or the give user's face has not been recognized.
                 if (!personIds.Any())
                 {
-                    this.ShowErrorMessage?.Invoke("User couldn't be recognized");
+                    this.Dialog.Alert("User couldn't be recognized");
                     return;
                 }
 
@@ -115,7 +116,7 @@ namespace CognitiveDemo
 
                 if (existingUserName == null)
                 {
-                    this.ShowErrorMessage?.Invoke("No user found with the given face");
+                    this.Dialog.Alert("No user found with the given face");
                     return;
                 }
             }
@@ -136,6 +137,7 @@ namespace CognitiveDemo
             {
                 if (media != null)
                 {
+                    this.Dialog.Loading("Processing");
                     this.FaceImage = ImageSource.FromStream(media.GetStream);
 
                     // Detect the faces from the photo.

@@ -73,7 +73,7 @@ namespace CognitiveDemo
         {
             if (!IsCameraAvailable)
             {
-                this.ShowErrorMessage?.Invoke("Camera is not available");
+                this.Dialog.Alert("Camera is not available");
                 return;
             }
 

@@ -79,24 +79,30 @@ namespace CognitiveDemo
         {
             if (this.Password != this.RepeatPassword)
             {
-                this.ShowErrorMessage?.Invoke("Passwords didn't match");
+                this.Dialog.Alert("Passwords didn't match");
                 return;
             }
 
             var existingUser = App.DbManager.GetAllUsers().FirstOrDefault(x => x.Name == this.Name);
             if (existingUser != null)
             {
-                this.ShowErrorMessage?.Invoke("User exists");
+                this.Dialog.Alert("User exists");
                 return;
             }
 
-            var userId = IsCameraAvailable ? await this.TrainFace(this.Name) : Guid.NewGuid();
+            var userId = Guid.NewGuid();
+            if (IsCameraAvailable)
+            {
+                userId = await this.TrainFace(this.Name);
+                this.Dialog.Loading().Hide();
+            }
+
             if (userId != Guid.Empty)
             {
                 var newUser = new User { UserId = userId.ToString(), Name = this.Name, Password = this.Password };
                 if (App.DbManager.SaveUser(newUser) == 0)
                 {
-                    this.ShowErrorMessage?.Invoke("Failed to create the user");
+                    this.Dialog.Alert("Failed to create the user");
                     return;
                 }
             }
@@ -111,35 +117,31 @@ namespace CognitiveDemo
         /// <param name="personName">Person name.</param>
         private async Task<Guid> TrainFace(string personName)
         {
-            // Find the person group. Get 5 of them that starts with the same string.
-            var personGroups = await App.FaceClient.ListPersonGroupsAsync();
-
-            // Create if not available.
-            if (!personGroups.Any(x => x.PersonGroupId == Constants.PersonGroupId))
-            {
-                await App.FaceClient.CreatePersonGroupAsync(Constants.PersonGroupId, "rpm-person-group");
-            }
-
-            // Check for an existing persion with the given name.
-            var persons = await App.FaceClient.GetPersonsAsync(Constants.PersonGroupId);
-            var personId = persons.FirstOrDefault(x => x.Name == personName)?.PersonId;
-
-            // Create a person record under the group.
-            if (!personId.HasValue)
-            {
-                var result = await App.FaceClient.CreatePersonAsync(Constants.PersonGroupId, personName);
-                if (result == null || result.PersonId == Guid.Empty)
-                {
-                    this.ShowErrorMessage?.Invoke("Couldn't create a person.");
-                    return Guid.Empty;
-                }
-
-                personId = result.PersonId;
-            }
-
             // Take a photo using the phone camera.
             using (var media = await this.TakePhoto())
             {
+                this.Dialog.Loading("Processing");
+
+                // Find the person group. Get 5 of them that starts with the same string.
+                var personGroups = await App.FaceClient.ListPersonGroupsAsync();
+
+                // Create if not available.
+                if (!personGroups.Any(x => x.PersonGroupId == Constants.PersonGroupId))
+                {
+                    await App.FaceClient.CreatePersonGroupAsync(Constants.PersonGroupId, "rpm-person-group");
+                }
+
+                // Check for an existing persion with the given name.
+                var persons = await App.FaceClient.GetPersonsAsync(Constants.PersonGroupId);
+                var personId = persons.FirstOrDefault(x => x.Name == personName)?.PersonId;
+
+                // Create a person record under the group.
+                if (!personId.HasValue)
+                {
+                    var result = await App.FaceClient.CreatePersonAsync(Constants.PersonGroupId, personName);
+                    personId = result.PersonId;
+                }
+
                 if (media != null)
                 {
                     // Add the photo against the person in the cognitive service.
@@ -148,11 +150,10 @@ namespace CognitiveDemo
                     {
                         // Train the group. Need to be done after every update.
                         await App.FaceClient.TrainPersonGroupAsync(Constants.PersonGroupId);
-                        return personId.Value;
                     }
                 }
 
-                return Guid.Empty;
+                return personId ?? Guid.Empty;
             }
         }
 

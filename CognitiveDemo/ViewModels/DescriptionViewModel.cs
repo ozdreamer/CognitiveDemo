@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using Acr.UserDialogs;
 using Microsoft.ProjectOxford.Common.Contract;
 using Microsoft.ProjectOxford.Vision;
 using Microsoft.ProjectOxford.Vision.Contract;
@@ -76,11 +77,12 @@ namespace CognitiveDemo
         {
             if (!IsCameraAvailable)
             {
-                this.ShowErrorMessage?.Invoke("Camera is not available");
+                this.Dialog.Alert("Camera is not available");
                 return;
             }
 
             this.SelectedAnalysisResult = await this.PerformAnalysis();
+            this.Dialog.Loading().Hide();
         }
 
         private async Task<AnalysisResult> PerformAnalysis()
@@ -89,6 +91,7 @@ namespace CognitiveDemo
             {
                 if (media != null)
                 {
+                    this.Dialog.Loading("Processing");
                     this.FaceImage = ImageSource.FromStream(media.GetStream);
                     return await App.VisionClient.AnalyzeImageAsync(media.GetStream(), new[]{ VisualFeature.Adult, VisualFeature.Color, VisualFeature.Description, VisualFeature.ImageType, VisualFeature.Faces, VisualFeature.Categories });
                 }

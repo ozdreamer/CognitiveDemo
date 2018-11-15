@@ -57,8 +57,9 @@
     <PackageReference Include="Microsoft.ProjectOxford.Face.DotNetStandard" Version="1.0.0" />
     <PackageReference Include="Microsoft.ProjectOxford.Emotion" Version="2.0.40" />
     <PackageReference Include="Microsoft.ProjectOxford.Vision" Version="1.0.393" />
-    <PackageReference Include="Microsoft.ProjectOxford.SpeechRecognition-x86" Version="1.0.0.7" />
     <PackageReference Include="Plugin.AudioRecorder" Version="1.1.0" />
+    <PackageReference Include="Microsoft.ProjectOxford.SpeechRecognition-x64" Version="1.0.0.7" />
+    <PackageReference Include="Acr.UserDialogs" Version="7.0.1" />
   </ItemGroup>
   <ItemGroup>
     <None Update="Database\CognitiveDemo.db">

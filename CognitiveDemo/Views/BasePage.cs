@@ -10,11 +10,6 @@ namespace CognitiveDemo
         {
             this.BaseViewModel = viewModel;
 
-            this.BaseViewModel.ShowErrorMessage = (message) =>
-            {
-                this.DisplayAlert("Error", message, "Cancel");
-            };
-
             this.BaseViewModel.Navigate = async (page) =>
             {
                 await Navigation.PushAsync(page);
