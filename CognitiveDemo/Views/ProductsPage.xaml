@@ -9,7 +9,13 @@
 			<ListView ItemsSource="{Binding Products}" HasUnevenRows="true" SeparatorVisibility="None" Margin="5">
 				<ListView.ItemTemplate>
 					<DataTemplate>
-						<local:CardViewCell Text="{Binding Name}" Detail="{Binding Title}" ImageSource="{Binding Image}"/>
+                        <ViewCell>
+                            <StackLayout BackgroundColor="White" Spacing="5">
+                                <Image Source="{Binding Image}" HeightRequest="41" WidthRequest="134" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Aspect="AspectFill"/>
+                                <Label Text="{Binding Name}" Font="15" TextColor="#030303" HorizontalOptions="Start" HorizontalTextAlignment="Start" Margin="12,0,10,12" LineBreakMode="WordWrap" VerticalOptions="End"/>
+                                <Label Text="{Binding Title}" Font="13" TextColor="#8F8E94" HorizontalOptions="Start" HorizontalTextAlignment="Start" Margin="12,0,10,12" LineBreakMode="WordWrap" VerticalOptions="End"/>
+                            </StackLayout>
+                        </ViewCell>
 					</DataTemplate>
 				</ListView.ItemTemplate>
 			</ListView>
