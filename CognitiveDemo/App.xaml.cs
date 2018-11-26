@@ -17,8 +17,6 @@ namespace CognitiveDemo
 
         public static FaceServiceClient FaceClient = new FaceServiceClient(Constants.FaceServiceSubscriptionKey1, Constants.FaceServiceEndPoint);
 
-        public static EmotionServiceClient EmotionClient = new EmotionServiceClient(Constants.VisionServiceSubscriptionKey1, Constants.EmotionServiceEndPoint);
-
         public App()
         {
             InitializeComponent();

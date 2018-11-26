@@ -99,18 +99,5 @@ namespace CognitiveDemo
 
             return null;
         }
-
-        private async Task<Emotion[]> Recognize()
-        {
-            using (var media = await this.TakePhoto())
-            {
-                if (media != null)
-                {
-                    return await App.EmotionClient.RecognizeAsync(media.GetStream());
-                }
-            }
-
-            return null;
-        }
     }
 }

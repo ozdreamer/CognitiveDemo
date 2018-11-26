@@ -22,7 +22,13 @@ namespace CognitiveDemo.iOS
                 Directory.CreateDirectory(libFolder);
             }
 
+            if (Constants.DeleteDatabase)
+            {
+                App.DbManager.DeleteAllUsers();
+            }
+
             string path = Path.Combine(libFolder, sqliteFilename);
+
             if (Constants.DeleteDatabase)
             {
                 File.Delete(path);

@@ -31,6 +31,7 @@
     <None Remove="Resources\Analog_Camera.png" />
     <None Remove="Resources\Face_Detection_Icon.png" />
     <None Remove="Resources\Microphone.png" />
+    <None Remove="Database\CognitiveDemo.db" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Remove="Styles\PageStyle.css" />
@@ -48,6 +49,7 @@
     <EmbeddedResource Include="Resources\Analog_Camera.png" />
     <EmbeddedResource Include="Resources\Face_Detection_Icon.png" />
     <EmbeddedResource Include="Resources\Microphone.png" />
+    <EmbeddedResource Include="Database\CognitiveDemo.db" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xam.Plugin.Media" Version="4.0.1.5" />
@@ -58,11 +60,6 @@
     <PackageReference Include="Microsoft.ProjectOxford.Emotion" Version="2.0.40" />
     <PackageReference Include="Acr.UserDialogs" Version="7.0.1" />
     <PackageReference Include="Microsoft.ProjectOxford.Vision" Version="1.0.393" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Update="Database\CognitiveDemo.db">
-      <LogicalName>CognitiveDemo.Database.CognitiveDemo.db</LogicalName>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="ViewModels\SpeechToTextViewModel.cs" />

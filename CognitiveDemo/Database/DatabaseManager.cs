@@ -8,7 +8,7 @@ namespace CognitiveDemo
 {
     public class DatabaseManager
     {
-        SQLiteConnection dbConnection;
+        private readonly SQLiteConnection dbConnection;
 
         public DatabaseManager()
         {
@@ -33,6 +33,11 @@ namespace CognitiveDemo
         public int SaveUser(User user)
         {
             return this.dbConnection.Insert(user);
+        }
+
+        public int DeleteAllUsers()
+        {
+            return this.dbConnection.DeleteAll<User>();
         }
     }
 }
