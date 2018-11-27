@@ -91,20 +91,25 @@ namespace CognitiveDemo
             }
 
             var userId = Guid.NewGuid();
+
+            // Media and face related code.
             if (IsCameraAvailable)
             {
                 userId = await this.TrainFace(this.Name);
                 this.Dialog.Loading().Hide();
             }
 
-            if (userId != Guid.Empty)
+            if (userId == Guid.Empty)
             {
-                var newUser = new User { UserId = userId.ToString(), Name = this.Name, Password = this.Password };
-                if (App.DbManager.SaveUser(newUser) == 0)
-                {
-                    this.Dialog.Alert("Failed to create the user");
-                    return;
-                }
+                this.Dialog.Alert("Failed to process the face");
+                return;
+            }
+
+            var newUser = new User { UserId = userId.ToString(), Name = this.Name, Password = this.Password };
+            if (App.DbManager.SaveUser(newUser) == 0)
+            {
+                this.Dialog.Alert("Failed to create the user");
+                return;
             }
 
             this.Navigate?.Invoke(new ProductsPage(this.Name));
@@ -122,7 +127,18 @@ namespace CognitiveDemo
             {
                 this.Dialog.Loading("Processing");
 
-                // Find the person group. Get 5 of them that starts with the same string.
+                if (media == null)
+                {
+                    return Guid.Empty;
+                }
+
+                var faces = await App.FaceClient.DetectAsync(media.GetStream());
+                if (!faces.Any())
+                {
+                    return Guid.Empty;
+                }
+
+               // Find the person group. Get 5 of them that starts with the same string.
                 var personGroups = await App.FaceClient.ListPersonGroupsAsync();
 
                 // Create if not available.
@@ -138,22 +154,21 @@ namespace CognitiveDemo
                 // Create a person record under the group.
                 if (!personId.HasValue)
                 {
-                    var result = await App.FaceClient.CreatePersonAsync(Constants.PersonGroupId, personName);
-                    personId = result.PersonId;
+                    var person = await App.FaceClient.CreatePersonAsync(Constants.PersonGroupId, personName);
+                    personId = person.PersonId;
                 }
 
-                if (media != null)
+                // Add the photo against the person in the cognitive service.
+                var faceResult = await App.FaceClient.AddPersonFaceAsync(Constants.PersonGroupId, personId.Value, media.GetStream(), targetFace: faces.First().FaceRectangle);
+                if (faceResult.PersistedFaceId == Guid.Empty)
                 {
-                    // Add the photo against the person in the cognitive service.
-                    var result = await App.FaceClient.AddPersonFaceAsync(Constants.PersonGroupId, personId.Value, media.GetStream());
-                    if (result.PersistedFaceId != Guid.Empty)
-                    {
-                        // Train the group. Need to be done after every update.
-                        await App.FaceClient.TrainPersonGroupAsync(Constants.PersonGroupId);
-                    }
+                    return Guid.Empty;
                 }
 
-                return personId ?? Guid.Empty;
+                // Train the group. Need to be done after every update.
+                await App.FaceClient.TrainPersonGroupAsync(Constants.PersonGroupId);
+
+                return personId.Value;
             }
         }
 
